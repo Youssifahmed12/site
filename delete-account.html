@@ -57,6 +57,17 @@
     display:flex; align-items:center; justify-content:center;
   }
 
+  .related-mini{ padding-top:18px; margin-top:6px; border-top:1px solid var(--line); }
+  .related-label{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--faint); margin:0 0 10px;
+  }
+  .related-mini a{
+    display:block; font-size:12.5px; color:var(--muted); text-decoration:none; padding:5px 0;
+    border-left:2px solid transparent; padding-left:10px; margin-left:-10px;
+  }
+  .related-mini a:hover{ color:var(--accent-ink); border-left-color:var(--accent); }
+
   .rail-foot{ margin-top:20px; padding-top:16px; border-top:1px solid var(--line);
     font-family:var(--mono); font-size:10.5px; color:var(--faint); line-height:1.6; }
 
@@ -130,6 +141,13 @@
         <li>Deletion completed within 30 days</li>
       </ol>
     </div>
+    <div class="related-mini">
+      <p class="related-label">Related pages</p>
+      <a href="/index.html">Privacy Policy</a>
+      <a href="/index.html#terms">Terms &amp; Conditions</a>
+      <a href="/support">Support &amp; Contact</a>
+    </div>
+
     <div class="rail-foot">
       EFFECTIVE 2026‑08‑01<br>
       APPLIES TO ALL APPLICATIONS
