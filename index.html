@@ -103,6 +103,17 @@
   nav.index a:hover{ color:var(--ink); background:var(--bg); }
   nav.index a.current{ color:var(--accent-ink); border-left-color:var(--accent); background:var(--bg); font-weight:600; }
 
+  .related-mini{ padding:16px 24px 0; margin-top:6px; border-top:1px solid var(--line); }
+  .related-label{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--faint); margin:0 0 10px;
+  }
+  .related-mini a{
+    display:block; font-size:12.5px; color:var(--muted); text-decoration:none; padding:5px 0;
+    border-left:2px solid transparent; padding-left:10px; margin-left:-10px;
+  }
+  .related-mini a:hover{ color:var(--accent-ink); border-left-color:var(--accent); }
+
   .rail-foot{
     padding:16px 24px 0; margin-top:14px;
     font-family:var(--mono); font-size:10.5px; color:var(--faint); line-height:1.6;
@@ -215,6 +226,12 @@
         <a href="#t-general"><span class="n">13</span>General</a>
         <a href="#t-contact"><span class="n">14</span>Contact</a>
       </nav>
+    </div>
+
+    <div class="related-mini">
+      <p class="related-label">Related pages</p>
+      <a href="/delete-account">Delete Your Account</a>
+      <a href="/support">Support &amp; Contact</a>
     </div>
 
     <div class="rail-foot">
@@ -516,6 +533,13 @@
     }
     window.addEventListener('scroll', onScroll, {passive:true});
     onScroll();
+  })();
+
+  // deep-link support: index.html#terms opens straight to the Terms tab
+  (function(){
+    if(window.location.hash.replace('#','') === 'terms'){
+      switchDoc('terms');
+    }
   })();
 </script>
 
