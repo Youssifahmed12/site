@@ -38,10 +38,6 @@
     margin:0 auto;
     min-height:100vh;
   }
-  @media (max-width:860px){
-    .shell{grid-template-columns:1fr;}
-    .rail{position:static; height:auto; border-right:none; border-bottom:1px solid var(--line);}
-  }
 
   /* ---------- left rail: filing-cabinet metaphor ---------- */
   .rail{
@@ -121,7 +117,6 @@
 
   /* ---------- main content ---------- */
   main{ padding:48px 56px 100px; max-width:760px; }
-  @media (max-width:860px){ main{ padding:32px 22px 80px; } }
 
   .doc-panel{ display:none; }
   .doc-panel.active{ display:block; }
@@ -170,6 +165,46 @@
   }
 
   .foot-note{ margin-top:44px; font-size:12px; color:var(--faint); line-height:1.7; }
+
+  /* ---------- mobile / small screens ---------- */
+  .mobile-toc{ display:none; }
+
+  @media (max-width:860px){
+    .shell{ grid-template-columns:1fr; }
+    .rail{
+      position:static; height:auto; border-right:none; border-bottom:1px solid var(--line);
+      padding:18px 18px 14px; overflow-y:visible;
+    }
+    .brand{ padding:0 0 14px; margin-bottom:14px; }
+    .doc-tabs{
+      padding:0; position:sticky; top:0; background:var(--bg); z-index:5; padding-top:2px;
+    }
+    .doc-tab{ padding:12px 4px; font-size:12px; }
+    /* Long section index & footer meta are desktop wayfinding — collapse them
+       on phones so people land on real content immediately instead of
+       scrolling past a wall of links first. */
+    .index-wrap{ margin:0; }
+    nav.index{ display:none; }
+    .index-title{ cursor:pointer; display:flex; align-items:center; justify-content:space-between; }
+    .index-title::after{ content:"Show ▾"; font-size:10px; color:var(--accent-ink); }
+    .index-wrap.open nav.index{ display:block; }
+    .index-wrap.open .index-title::after{ content:"Hide ▴"; }
+    .related-mini, .rail-foot{ display:none; }
+
+    main{ padding:28px 18px 70px; max-width:100%; }
+    .doc-head{ margin-bottom:26px; padding-bottom:18px; }
+    .doc-head h2{ font-size:clamp(24px, 7vw, 30px); }
+    .doc-head .sub{ font-size:14px; max-width:none; }
+    .scope-card{ padding:14px; font-size:13px; }
+    section.clause h3{ font-size:17px; }
+    section.clause p, section.clause li{ font-size:14px; }
+    .contact-card{ padding:18px 16px; }
+  }
+
+  @media (max-width:420px){
+    main{ padding:22px 14px 60px; }
+    .doc-head h2{ font-size:22px; }
+  }
 </style>
 </head>
 <body>
@@ -189,8 +224,8 @@
       <div class="doc-tab" data-doc="terms" onclick="switchDoc('terms')">Terms &amp; Conditions</div>
     </div>
 
-    <div class="index-wrap">
-      <p class="index-title">On this page</p>
+    <div class="index-wrap" id="index-wrap">
+      <p class="index-title" onclick="toggleIndex()">On this page</p>
       <nav class="index" id="index-privacy">
         <a class="n" href="#p-collection"><span class="n">01</span>Information Collected</a>
         <a href="#p-cookies"><span class="n">02</span>Cookies &amp; Tracking</a>
@@ -508,6 +543,10 @@
     document.getElementById('index-privacy').style.display = (name === 'privacy') ? 'block' : 'none';
     document.getElementById('index-terms').style.display = (name === 'terms') ? 'block' : 'none';
     window.scrollTo({top:0, behavior:'instant' in window ? 'instant' : 'auto'});
+  }
+
+  function toggleIndex(){
+    document.getElementById('index-wrap').classList.toggle('open');
   }
 
   // highlight current section on scroll, per active document
